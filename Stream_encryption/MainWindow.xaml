@@ -42,13 +42,21 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Label x:Name="label" Content="Потоковое шифрование" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Left" VerticalContentAlignment="Stretch" IsEnabled="False" Grid.ColumnSpan="4" FontSize="24" Foreground="Black"/>
-            <RadioButton x:Name="radioButton" Grid.Column="4" Content="RadioButton" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="24" ScrollViewer.CanContentScroll="True" Grid.ColumnSpan="3"/>
-            <RadioButton x:Name="radioButton1" Grid.Column="7" Content="RadioButton" HorizontalAlignment="Stretch" Grid.Row="0" VerticalAlignment="Stretch" Grid.ColumnSpan="3" FontSize="24"/>
-            <Button x:Name="button" Grid.Column="11" Content="Button" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.ColumnSpan="3" FontSize="24"/>
-            <Label x:Name="label1" Content="Сгенерировать ключ" HorizontalAlignment="Stretch" Grid.Row="1" VerticalAlignment="Stretch" Grid.ColumnSpan="4" FontSize="24"/>
-            <TextBox x:Name="textBox" Grid.Column="4" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" Grid.Row="1" TextWrapping="NoWrap" Text="TextBox" VerticalAlignment="Stretch" FontSize="24" MaxLines="1" MaxLength="64"/>
-            <Label x:Name="label2" Grid.Column="7" Content="Введите ключ" HorizontalAlignment="Stretch" Grid.Row="1" VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Grid.ColumnSpan="3" FontSize="24"/>
-            <TextBox x:Name="textBox1" Grid.Column="11" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Stretch" FontSize="24" MaxLength="64" MaxLines="1"/>
+            <Button x:Name="button" Grid.Column="11" Content="выполнять" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.ColumnSpan="3" FontSize="24" FontWeight="Normal" Click="button_Click"/>
+            <Label x:Name="label1" Content="ключ" HorizontalAlignment="Stretch" Grid.Row="1" VerticalAlignment="Stretch" Grid.ColumnSpan="4" FontSize="24"/>
+            <TextBox x:Name="textBox" Grid.Column="4" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" Grid.Row="1" TextWrapping="NoWrap" VerticalAlignment="Stretch" FontSize="24" MaxLines="1" MaxLength="64" IsReadOnly="True"/>
+            <Label x:Name="label3" Grid.Column="0" Content="Оригинальный текст" HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Grid.ColumnSpan="7" FontSize="24"/>
+            <Label x:Name="label4" Grid.Column="7" Content="Зашифрованный текст" HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Grid.ColumnSpan="7" FontSize="24"/>
+            <TextBox x:Name="textBox2" Grid.Column="0" Grid.ColumnSpan="7" HorizontalAlignment="Stretch" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Stretch" Grid.RowSpan="8" Margin="0,0,10,0" FontSize="36" VerticalScrollBarVisibility="Auto"/>
+            <TextBox x:Name="textBox3" Grid.Column="7" Grid.ColumnSpan="7" HorizontalAlignment="Stretch" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Stretch" Margin="10,0,0,0" Grid.RowSpan="8" FontSize="36" VerticalScrollBarVisibility="Auto"/>
+            <Button x:Name="button1" Content="О программе" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" Grid.Row="12" VerticalAlignment="Stretch" FontSize="20" Click="button1_Click"/>
+            <Button x:Name="button2" Grid.Column="3" Content="Сохранить в файл" HorizontalAlignment="Stretch" Grid.Row="12" VerticalAlignment="Stretch" Grid.ColumnSpan="3" FontSize="24" Click="button2_Click"/>
+            <Button x:Name="button3" Grid.Column="7" Content="Чтение из файла" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" Grid.Row="12" VerticalAlignment="Stretch" FontSize="24" Click="button3_Click"/>
+            <Button x:Name="button4" Grid.Column="11" Content="Анализ данных" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" Grid.Row="12" VerticalAlignment="Stretch" FontSize="24" Click="button4_Click"/>
+            <StackPanel Grid.Column="4" Grid.ColumnSpan="6" Orientation="Horizontal">
+                <RadioButton x:Name="radioButton" Content="Шифрование"  FontSize="24" HorizontalAlignment="Center" Padding="26,-1,0,0" Checked="radioButton_Checked" ClickMode="Release" IsChecked="True"/>
+                <RadioButton x:Name="radioButton1" Content="Расшифровывать" FontSize="24"  HorizontalAlignment="Center" Padding="17,-1,0,0" Checked="radioButton1_Checked" IsChecked="True"/>
+            </StackPanel>
         </Grid>
 
     </Grid>
