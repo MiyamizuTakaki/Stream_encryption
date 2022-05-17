@@ -1,14 +1,19 @@
 ﻿using Microsoft.Win32;
+using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Windows;
+using System.Windows.Media;
 
 namespace Stream_encryption
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+    
     public partial class MainWindow : Window
     {
+        private Dictionary<Dictionary<Dictionary<List<char>, List<int>>, Dictionary<List<char>, List<int>>>, List<string>> all2 = new Dictionary<Dictionary<Dictionary<List<char>, List<int>>, Dictionary<List<char>, List<int>>>, List<string>>();
         public MainWindow()
         {
             InitializeComponent();
@@ -20,7 +25,7 @@ namespace Stream_encryption
             textBox.Text = "";
             textBox.IsReadOnly = true;
             textBox2.IsReadOnly = false;
-
+            button4.IsEnabled = false;
             textBox3.IsReadOnly = true;
         }
 
@@ -30,6 +35,7 @@ namespace Stream_encryption
             textBox2.Text = "";
             textBox.IsReadOnly = false;
             textBox2.IsReadOnly = true;
+            button4.IsEnabled = false;
             textBox3.IsReadOnly = false;
         }
 
@@ -68,18 +74,27 @@ namespace Stream_encryption
                 Execution_manager execution_Manager = new Execution_manager(jiemi, textBox2.Text);
                 textBox3.Text = execution_Manager.get_text();
                 textBox.Text = execution_Manager.get_keying();
+                all2 = execution_Manager.need_ansy();
             }
             else if (jiemi == true && exctue == true)
             {
                 Execution_manager execution_Manager = new Execution_manager(jiemi, textBox3.Text, textBox.Text);
                 textBox2.Text = execution_Manager.get_text();
+                all2 = execution_Manager.need_ansy();
             }
-            button2.IsEnabled = true;
+            if(textBox2.Text!=""&&textBox3.Text!="")
+            {
+                button2.IsEnabled = true;
+                button4.IsEnabled = true;
+            }
+                
         }
 
+        MediaPlayer player = new MediaPlayer();
         private void button1_Click(object sender, RoutedEventArgs e)//关于本程序
         {
-
+            player.Open(new Uri("molodyets.mp3", UriKind.Relative));
+            player.Play();
         }
 
         private void button2_Click(object sender, RoutedEventArgs e)//保存为一个文件
@@ -111,6 +126,7 @@ namespace Stream_encryption
             {
                 sw.WriteLine(savedata);
             }
+            MessageBox.Show("密钥文件不保存，请妥善保管！");
         }
 
         private void button3_Click(object sender, RoutedEventArgs e)//打开一个文件
@@ -133,9 +149,23 @@ namespace Stream_encryption
             while (( lines = sw.ReadLine()) != null)
             {
                 if (lines == "Miyamizu_Original_Text")
-                { jiemi = false; t1 = true; continue; }
+                { 
+                    jiemi = false;
+
+                    if ((bool)radioButton.IsChecked)
+                    { t1 = true; continue; }
+                    else
+                        MessageBox.Show("请在解密模式下进行");
+                }
                 else if (lines == "Miyamizu_EncpyText")
-                { jiemi = true; t1 = true; continue; }
+                { 
+                    jiemi = true;
+
+                    if ((bool)radioButton1.IsChecked)
+                    { t1 = true; continue; }
+                    else
+                        MessageBox.Show("请在加密模式下进行");
+                }
                 else if (t1 == false)
                 {
                     MessageBox.Show("请选择由宫水提供的加解密文件");
@@ -145,14 +175,18 @@ namespace Stream_encryption
                     line = lines;
             }
             if (jiemi)
-                textBox3.Text = line;
+            { textBox3.Text = line; textBox2.Text = ""; }
             else
-                textBox2.Text = line;
+            { textBox2.Text = line; textBox3.Text = ""; }
+            MessageBox.Show("密钥文件不保存，请妥善保管！");
         }
+
 
         private void button4_Click(object sender, RoutedEventArgs e)//分析数据
         {
-
+            AnalyseList w2 = new AnalyseList(all2);
+            w2.Show();
+            w2.Owner = this;
         }
     }
 }

@@ -13,6 +13,16 @@ namespace Stream_encryption
         private List<int> First_array = new List<int>();
         private List<int> Second_array = new List<int>();
         private List<int> Third_array = new List<int>();
+        private List<char> gettxt = new List<char>();
+        private List<int> gettxt2 = new List<int>();
+        private List<char> sendtxt = new List<char>();
+        private List<int> sendtxt2 = new List<int>();
+        private List<string> bincode = new List<string>();
+        private Dictionary<List<char>, List<int>> gettxt3= new Dictionary<List<char>, List<int>>();
+        private Dictionary<List<char>, List<int>> sendtxt3 = new Dictionary<List<char>, List<int>>();
+        private Dictionary<Dictionary<List<char>, List<int>>, Dictionary<List<char>, List<int>>> all1 = new Dictionary<Dictionary<List<char>, List<int>>, Dictionary<List<char>, List<int>>>();
+        private Dictionary<Dictionary<Dictionary<List<char>, List<int>>, Dictionary<List<char>, List<int>>>, List<string>> all2 = new Dictionary<Dictionary<Dictionary<List<char>, List<int>>, Dictionary<List<char>, List<int>>>, List<string>>();
+
         public string GetText(string getori, string getepy)
         {
             this.longs = getepy.Length;
@@ -27,14 +37,28 @@ namespace Stream_encryption
                 Third_array.Add(1);
             for (int j = 0; j < getori.Length; j++)
             {
+                gettxt.Add(getori[j]);
+                gettxt2.Add(Convert.ToInt32(getori[j]));
                 string key = "";
                 for (int i = 0; i < Key_long; i++)
                     key += Second_array[i];
+                bincode.Add(key);
                 GetNewKey();
                 c++;
-                resulttext += Convert.ToChar(Convert.ToByte(getori[j]) ^ BinToByte(key));
+                char prosend = Convert.ToChar(Convert.ToByte(getori[j]) ^ BinToByte(key));
+                sendtxt.Add(prosend);
+                sendtxt2.Add(Convert.ToInt32(prosend));
+                resulttext += prosend;
             }
+            gettxt3.Add(gettxt, gettxt2);
+            sendtxt3.Add(sendtxt, sendtxt2);
+            all1.Add(gettxt3, sendtxt3);
+            all2.Add(all1, bincode);
             return resulttext;
+        }
+        public Dictionary<Dictionary<Dictionary<List<char>, List<int>>, Dictionary<List<char>, List<int>>>, List<string>> get_key_list()
+        {
+            return all2;
         }
         private void GetNewKey()
         {

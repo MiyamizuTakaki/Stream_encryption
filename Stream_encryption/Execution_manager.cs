@@ -11,6 +11,11 @@ namespace Stream_encryption
     {
         private string get_keyss = "";
         private string text;
+        private string gettxtss = "";
+        private Dictionary<char, int> textss = new Dictionary<char, int>();
+        private Dictionary<char, int> gettxtsss = new Dictionary<char, int>();
+        private Dictionary<string, string> getkeyact = new Dictionary<string, string>();
+        private Dictionary<Dictionary<Dictionary<List<char>, List<int>>, Dictionary<List<char>, List<int>>>, List<string>> all2 = new Dictionary<Dictionary<Dictionary<List<char>, List<int>>, Dictionary<List<char>, List<int>>>, List<string>>();
         private void create_Keys(int text_lens)
         {
             get_keyss = "";
@@ -66,11 +71,35 @@ namespace Stream_encryption
         public string get_text()
         {
             UnEncpy unEncpy = new UnEncpy();
-            return unEncpy.GetText(this.text, get_keyss);
+            this.gettxtss=unEncpy.GetText(this.text, get_keyss);
+            this.all2 = unEncpy.get_key_list();
+            return this.gettxtss;
         }
         public string get_keying()
         {
             return get_keyss;
+        }
+        public void get_analyse()
+        {
+            textss.Clear();
+            for(int i=0;i<this.text.Length;i++)
+            {
+                char alpa = this.text[i];
+                int ascii = Convert.ToInt16(alpa);
+                textss.Add(alpa, ascii);
+            }
+            gettxtsss.Clear();
+            for (int i = 0; i < this.gettxtss.Length; i++)
+            {
+                char alpa = this.gettxtss[i];
+                int ascii = Convert.ToInt16(alpa);
+                gettxtsss.Add(alpa, ascii);
+            }
+
+        }
+        public Dictionary<Dictionary<Dictionary<List<char>, List<int>>, Dictionary<List<char>, List<int>>>, List<string>> need_ansy()
+        {
+            return all2;
         }
     }
 }
